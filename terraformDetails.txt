@@ -1,0 +1,43 @@
+Reference Book:
+https://terraformbook.com/TheTerraformBook_sample.pdf
+https://docs.bigchaindb.com/projects/server/en/v0.8.2/appendices/aws-setup.html
+https://linuxacademy.com/community/posts/show/topic/18181-can-somebody-explain-how-to-install-terraform
+https://www.terraform.io/docs/providers/aws/r/instance.html
+
+
+
+1.Download Terraform from the link below: https://www.terraform.io/downloads.html
+2.Open EC2 instance on the putty
+3. fire this command in putty: wget  https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip
+4. install unzip version using this cmd: apt install unzip
+5. Fire this command in a directory to extract terraform: unzip terraform_0.11.3_linux_amd64.zip
+6. Move this unzipped terraform folder under: /usr/local/bin
+7. rm terraform_0.11.3_linux_amd64.zip in putty.
+8. Go to parent directory and fire this cmd:  terraform --version
+
+9. inside terraform directory: vim ec2_instance.tf
+10 copy the below code of HCL format:
+   provider "aws" {
+        region = "us-east-2"
+ }
+
+   resource "aws_instance" "manee2k6" {
+        ami = "ami-965e6bf3"
+        instance_type = "t2.micro"
+        key_name = "terraform"
+        security_groups= ["JenkinsSG"]
+        tags {
+         Name = "terraform-instance"
+        }
+ }
+
+11. fire the following command where the file above ec2_instance.tf exists:
+     terraform init
+     terraform plan
+     terraform apply
+     terraform destroy
+
+
+
+
+
